@@ -10,12 +10,55 @@
     },
     "build": {
       "dependsOn": ["^build"],
+      "outputs": [".next/**", "!.next/cache/**"],
+      "env": []
+    },
+    "web#build": {
+      "dependsOn": ["^build"],
+      "env": [
+        "DATABASE_URL",
+        "DISCORD_CLIENT_ID",
+        "DISCORD_CLIENT_SECRET",
+        "GOOGLE_CLIENT_ID",
+        "GOOGLE_CLIENT_SECRET",
+        "NEXTAUTH_SECRET",
+        "JWT_SECRET",
+        "UPLOADTHING_SECRET",
+        "UPLOADTHING_API_KEY",
+        "UPLOADTHING_APP_ID",
+        "SECRET_KEY",
+        "JWT_SECRET"
+      ],
       "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "worker#build": {
+      "dependsOn": ["^build"],
+      "env": [
+        "DATABASE_URL",
+        "DISCORD_CLIENT_ID",
+        "DISCORD_CLIENT_SECRET",
+        "GOOGLE_CLIENT_ID",
+        "GOOGLE_CLIENT_SECRET",
+        "NEXTAUTH_SECRET",
+        "JWT_SECRET",
+        "UPLOADTHING_SECRET",
+        "UPLOADTHING_API_KEY",
+        "UPLOADTHING_APP_ID",
+        "SECRET_KEY",
+        "JWT_SECRET"
+      ]
     },
     "lint": {},
     "dev": {
       "cache": false,
       "persistent": true
     }
-  }
+  },
+  "globalEnv": [
+    "DATABASE_URL",
+    "UPLOADTHING_SECRET",
+    "UPLOADTHING_APP_ID",
+    "JWT_SECRET",
+    "ENCRYPTION_KEY"
+  ]
 }
