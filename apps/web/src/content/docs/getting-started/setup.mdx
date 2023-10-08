@@ -1,0 +1,78 @@
+---
+title: Setup
+index: 2
+---
+
+import Alert from "../../../components/Alert";
+
+<Alert
+  text={
+    "Linker is beta release, these docs are in a work in progress. Some features of the docs and the app may change"
+  }
+  type="note"
+/>
+
+In order to setup linker on your own machine you must first clone the repository
+
+```bash
+git clone https://github.com/SklyerX/linker.git
+```
+
+then cd into the project
+
+```
+cd linker
+```
+
+Install all the packages _(you have need to go do it in the folder that you want to edit too)_
+
+In the root:
+
+```
+yarn install
+```
+
+After doing that you can navigate to the nextjs app which is located at `apps/web`
+
+```
+cd apps/web
+```
+
+You many need to run the install command once more. In some cases you might have to navigate to every package and the web app and run the install command. This rarely happens
+
+Then create a `.env.local` file.
+
+If you do not already have project credentials you may need to visit these sites and create projects in them.
+
+- [Discord Developer Portal](https://discord.com/developers/applications/)
+- [Google API Portal](https://console.cloud.google.com/apis/credentials)
+- [Uploadthing](https://uploadthing.com/)
+- [MongoDB](https://mongodb.com/)
+
+The file should look like this:
+
+```env
+DATABASE_URL="MONGODB CONNECTION URI"
+
+DISCORD_CLIENT_ID="APP ID"
+DISCORD_CLIENT_SECRET="APP SECRET"
+
+GOOGLE_CLIENT_ID="APP ID"
+GOOGLE_CLIENT_SECRET="APP SECRET"
+
+NEXTAUTH_SECRET="some super secure secret"
+JWT_SECRET="another super secure secret"
+
+UPLOADTHING_SECRET="sk_..."
+UPLOADTHING_API_KEY="sk_..."
+UPLOADTHING_APP_ID="APP ID"
+
+SECRET_KEY="Yet another super secure key"
+JWT_SECRET="Another one"
+```
+
+Finally you can run the apps by typing the following in the root of the project.
+
+```
+yarn dev
+```

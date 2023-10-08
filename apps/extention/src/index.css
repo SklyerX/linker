@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Bricolage Grotesque", sans-serif;
+  background-color: #121212;
+  color: #fff;
+  width: 400px;
+}
+
+.button {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 1px solid #272727;
+  transition: color 0.3s ease-in-out linear;
+}
+
+.button:hover {
+  background-color: #252525;
+}

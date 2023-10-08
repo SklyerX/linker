@@ -1,3 +1,6 @@
+[docs](https://linker.skylerx.ir/docs/)
+[DEMO](https://linker.skylerx.ir/)
+
 # Turborepo starter
 
 This is an official starter Turborepo.
@@ -16,9 +19,7 @@ This Turborepo includes the following packages/apps:
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
+- `web`: a [Next.js](https://nextjs.org/) app
 - `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
 
@@ -38,7 +39,7 @@ To build all apps and packages, run the following command:
 
 ```
 cd my-turborepo
-pnpm build
+yarn build
 ```
 
 ### Develop
@@ -47,7 +48,7 @@ To develop all apps and packages, run the following command:
 
 ```
 cd my-turborepo
-pnpm dev
+yarn dev
 ```
 
 ### Remote Caching

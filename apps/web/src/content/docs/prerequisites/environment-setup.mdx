@@ -1,0 +1,48 @@
+---
+title: Environment Setup
+index: 3
+---
+
+### Setting up the development envrionment
+
+Before setting the project make sure that you have [nodejs v18.13+](https://nodejs.dev) installed on your system. Anything lower will cause some of the packages to not function properly and throw unwanted errors.
+
+After doing that make sure follow the steps list [here](/docs/getting-started/setup) then refer back to here.
+
+You'd want to have a proper code editor in which you can proper read the code. My suggestion is [vscode](https://code.visualstudio.com) but you can use anything you want.
+
+However, if you code editor does not have extensions or cannot properly highlight prisma files you will have a hard time editting the schema.
+
+The file is located at `packages/database/prisma/schema`
+
+After doing all that you should be good to go!
+
+Run the following command from the root of the project.
+
+```bash
+yarn dev
+```
+
+### Database
+
+If you make a change in the prisma file and you want it to reflect across your application you have to run the following command
+
+```bash
+yarn turbo db:push db:generate
+```
+
+If you see it succeed but your editor still shows errors (sometimes vscode can bug out) you have to find the types file for the prisma client that gets generated. You can find it my cmd/control + clicking on the text found at `packages/database/src/index.ts`
+
+Click on:
+
+```ts
+export * from "@prisma/client";
+```
+
+Then click on:
+
+```ts
+export * from ".prisma/client";
+```
+
+Then vscode should find the new types and stop throwing errors.

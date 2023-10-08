@@ -1,0 +1,138 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+
+  image        String?
+  accounts     Account[]
+  sessions     Session[]
+  Links        Link[]
+  Groups       group[]
+  GroupedLinks GroupedLink[]
+  Markdowns    Markdown[]
+  Urls         Url[]
+  Export       ExportQueue[]
+}
+
+model group {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  user User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  groupName String
+  Links     Link[]
+
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model GroupedLink {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String?
+  image       String
+  url         String
+  groupId     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  userId      String
+  description String?
+
+  User User @relation(fields: [userId], references: [id])
+}
+
+model Link {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  image       String
+  title       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  userId      String
+  url         String
+  description String?
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  group       group?   @relation(fields: [groupId], references: [id])
+  groupId     String?  @db.ObjectId
+}
+
+model Markdown {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  content   Json
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  User      User     @relation(fields: [userId], references: [id])
+}
+
+model Url {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  urlId       String
+  userId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  active      Boolean
+  redirectUrl String
+  User        User     @relation(fields: [userId], references: [id])
+}
+
+// operation for the account exporting hosted on a seperate nodejs API
+
+model ExportQueue {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String
+  status        Status
+  fileKey       String?
+  User          User     @relation(fields: [userId], references: [id])
+  selectedItems String[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
+}
+
+enum Status {
+  WAITING
+  IN_PROGRESS
+  FINISHED
+}

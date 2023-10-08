@@ -1,0 +1,32 @@
+---
+title: Faq
+index: 4
+---
+
+### What is it?
+
+Linker is made for storing links in an organized fasion and being able to find what you need by searching for it.
+
+### Can I download it?
+
+As of right now linker is a **web app** meaning it only exists on the browser. Later on I might make it into a desktop app and possible bring it to the mobile world.
+
+### How does it work?
+
+Linker gets your input then adds it to the database but before doing that it checks the url to see if it can find a site thumbnail or cover image to use.
+
+### Who is it for?
+
+Linker is built for those who love to surf the web and those who just have way too many open tabs (tab hoarders). I am guilty of that myself. When working on a project or doing research for school I have many many tabs open and the important things can get lost, or sometimes you just want to have that link for a later use and don not want to keep it in your browser.
+
+### What is the stack?
+
+Linker is built with [Next.Js](https://nextjs.org), [TypeScript](https://typescriptlang.org), [Prisma](https://prisma.io), [MongoDB](https://monogdb.com), [Turbo Repo](https://turbo.build) and [Express](https://expressjs.com).
+
+### Why ExpressJS?
+
+Linker has a worker app that is hosted somewhere (not on the client) and it is to export accounts. I tried this one the NextJS endpoint but it made the site really heavy and it stopped the user from being able to use the app while their account was being exported. So I made a worker service so it does not way down the client.
+
+### Why a Monorepo?
+
+The app has many little components and all work together and it is also easier to manage the code in a monoerepo. The next time I want to make a change to a feature it will be reflected across my app simultaneously. It also makes deploying to GitHub a lot easier as I do not need to create several branches or several repos for one project.
